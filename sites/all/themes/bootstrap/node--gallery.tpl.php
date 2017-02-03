@@ -140,7 +140,13 @@
         </div>
 
     </div>
-    </td></tr></table>
+    </td></tr>
+    <tr>
+      <td style="text-align:left; padding-top:40px;"> 
+        <?php print $node->body['und'][0]['value']; ?>
+      </td>
+    </tr>
+    </table>
     <?php if ($content['links']): ?>
       <div class="node-links">
         <?php print render($content['links']); ?>
