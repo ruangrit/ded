@@ -80,6 +80,7 @@
 <?php
   //drupal_add_library('jquery_plugin', 'cycle');
   drupal_add_js(drupal_get_path('module', 'druprong').'/jquery.cycle2.js');
+  drupal_add_js(drupal_get_path('module', 'druprong').'/jquery.cycle2.center.js');
 
   drupal_session_start();
   $_SESSION['nid'] = $node->nid;
@@ -105,22 +106,24 @@
     <?php endif; ?>
 
     <div class="node-content"<?php print $content_attributes; ?>>
-     <table style="margin: auto; text-align: center;"><tr><td style="padding-top: 80px;">
+
      <span id="loading" style="display:block">Loading...</span>
-     <div class="gallery-wrapper">
-       <div style="position: relative; max-width:800px;overflow: hidden; display:none" class="slideshow"
+     <div class="gallery-wrapper text-center">
+       <div style="display:none" class="slideshow"
         data-cycle-fx=fade
         data-cycle-timeout=0
         data-cycle-prev="#prev"
         data-cycle-next="#next"
         data-cycle-speed=10
+        data-cycle-center-horz=true
+        data-cycle-center-vert=true
         data-cycle-caption-template="{{slideNum2}} | {{slideCount2}}"
         data-cycle-caption=".caption2">
 	      <?php
 		foreach($content['field_gallery']['#items'] as $image) {
 		  $path = file_create_url($image['uri']);
 		?>
-			  <img class="large-image" title="<?php print $node->title;?>" src="<?php print $path ?>" style="width:800px; cursor: pointer">
+			  <img class="large-image" title="<?php print $node->title;?>" src="<?php print $path ?>" style="cursor: pointer">
 		<?php
 		}
 		?>
@@ -140,13 +143,9 @@
         </div>
 
     </div>
-    </td></tr>
-    <tr>
-      <td style="text-align:left; padding-top:40px;"> 
-        <?php print $node->body['und'][0]['value']; ?>
-      </td>
-    </tr>
-    </table>
+    <div style="text-align:left; padding-top:40px;"> 
+      <?php print $node->body['und'][0]['value']; ?>
+    </div>
     <?php if ($content['links']): ?>
       <div class="node-links">
         <?php print render($content['links']); ?>
